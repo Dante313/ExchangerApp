@@ -1,4 +1,4 @@
-package com.example.walletexchangerapp.presenter.screens.favourite
+package com.example.walletexchangerapp.ui.presenter.screens.favourite
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

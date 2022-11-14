@@ -6,7 +6,6 @@ data class Wallet(
     val id: Long = 0,
     val base: String,
     val rates: Rates,
-    val isFavourite: Boolean
 ) {
     companion object {
 

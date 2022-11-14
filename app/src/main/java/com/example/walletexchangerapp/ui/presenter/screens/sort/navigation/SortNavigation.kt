@@ -1,4 +1,4 @@
-package com.example.walletexchangerapp.presenter.screens.sort.navigation
+package com.example.walletexchangerapp.ui.presenter.screens.sort.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder

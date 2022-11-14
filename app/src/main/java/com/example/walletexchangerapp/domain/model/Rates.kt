@@ -4,17 +4,17 @@ import com.example.walletexchangerapp.data.database.entity.RatesEntity
 
 data class Rates(
     val id: Long = 0,
-    val eur: Double,
-    val gbr: Double,
-    val jpy: Double
+    val eur: Rate,
+    val gbr: Rate,
+    val jpy: Rate
 ) {
     companion object {
 
         fun Rates.toRatesEntity(walletId: Long) = RatesEntity(
             id = id,
-            eur = eur,
-            gbr = gbr,
-            jpy = jpy,
+            eur = eur.amount,
+            gbr = gbr.amount,
+            jpy = jpy.amount,
             walletId = walletId
         )
     }

@@ -1,4 +1,4 @@
-package com.example.walletexchangerapp.presenter.screens.favourite.navigation
+package com.example.walletexchangerapp.ui.presenter.screens.favourite.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder

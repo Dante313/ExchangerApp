@@ -1,4 +1,4 @@
-package com.example.walletexchangerapp.presenter.screens.common
+package com.example.walletexchangerapp.ui.presenter.screens.common
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.walletexchangerapp.R
-import com.example.walletexchangerapp.domain.model.Rate
 
 @Composable
 fun RatesList(rates: List<Rate>, onAddedToFavourite: (Rate) -> Unit, modifier: Modifier = Modifier) {

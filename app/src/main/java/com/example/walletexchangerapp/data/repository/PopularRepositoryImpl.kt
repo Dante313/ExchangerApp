@@ -106,8 +106,7 @@ class PopularRepositoryImpl @Inject constructor(
     private fun createLocalPopular(localWallet: WalletEntity, localRates: RatesEntity): Wallet {
         return Wallet(
             base = localWallet.base,
-            rates = localRates.toRates(),
-            isFavourite = false
+            rates = localRates.toRates()
         )
     }
 }

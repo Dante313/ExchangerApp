@@ -11,12 +11,12 @@ interface ExchangerApi {
     // убрать апи кей
     @GET("/latest")
     suspend fun getPopularWalletList(
-        @Header(HEADER_AUTHORIZATION) apikey: String = API_KEY,
+//        @Header(HEADER_AUTHORIZATION) apikey: String = API_KEY,
         @Query("wallet") wallet: String
     ) : Response<RemoteWallet>
 
-    companion object {
-        private const val HEADER_AUTHORIZATION = "apikey"
-        private const val API_KEY = "y0IcT03LruY9vdPpvSA7d7v9WFchM0DS"
-    }
+//    companion object {
+//        private const val HEADER_AUTHORIZATION = "apikey"
+//        private const val API_KEY = "y0IcT03LruY9vdPpvSA7d7v9WFchM0DS"
+//    }
 }

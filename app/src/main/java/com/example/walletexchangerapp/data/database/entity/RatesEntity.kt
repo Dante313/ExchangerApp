@@ -1,6 +1,7 @@
 package com.example.walletexchangerapp.data.database.entity
 
 import androidx.room.*
+import com.example.walletexchangerapp.domain.model.Rate
 import com.example.walletexchangerapp.domain.model.Rates
 
 @Entity(
@@ -38,9 +39,9 @@ data class RatesEntity(
     companion object {
 
         fun RatesEntity.toRates() = Rates(
-            eur = eur,
-            gbr = gbr,
-            jpy = jpy
+            eur = Rate(wallet = "EUR", amount = eur, isFavourite = false),
+            gbr = Rate(wallet = "GBR", amount = gbr, isFavourite = false),
+            jpy = Rate(wallet = "JPY", amount = jpy, isFavourite = false)
         )
     }
 }
