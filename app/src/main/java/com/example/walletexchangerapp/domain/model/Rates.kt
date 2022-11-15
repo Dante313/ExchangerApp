@@ -1,21 +1,15 @@
 package com.example.walletexchangerapp.domain.model
 
-import com.example.walletexchangerapp.data.database.entity.RatesEntity
+data class RatesList(val rates: List<Rate>)
 
-data class Rates(
-    val id: Long = 0,
-    val eur: Rate,
-    val gbr: Rate,
-    val jpy: Rate
-) {
+data class RatesMap(val rates: Map<String, Rate>) {
     companion object {
-
-        fun Rates.toRatesEntity(walletId: Long) = RatesEntity(
-            id = id,
-            eur = eur.amount,
-            gbr = gbr.amount,
-            jpy = jpy.amount,
-            walletId = walletId
-        )
+        fun RatesMap.toRatesList() = RatesList(rates.values.toList())
     }
 }
+
+data class Rate(
+    val wallet: String,
+    val amount: Double,
+    val isFavourite: Boolean
+)

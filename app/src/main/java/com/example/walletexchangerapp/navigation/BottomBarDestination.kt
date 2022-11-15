@@ -7,18 +7,15 @@ import com.example.walletexchangerapp.common.Icon
 
 
 enum class BottomBarDestination(
-    val selectedIcon: Icon,
-    val unselectedIcon: Icon,
+    val icon: Icon,
     @StringRes val iconTextId: Int
 ) {
     POPULAR(
-        selectedIcon = Icon.DrawableResourceIcon(ExchangerIcons.PopularFilled),
-        unselectedIcon = Icon.DrawableResourceIcon(ExchangerIcons.Popular),
+        icon = Icon.ImageVectorIcon(ExchangerIcons.Popular),
         iconTextId = R.string.popular
     ),
     FAVOURITE(
-        selectedIcon = Icon.DrawableResourceIcon(ExchangerIcons.FavouriteFilled),
-        unselectedIcon = Icon.DrawableResourceIcon(ExchangerIcons.Favourite),
+        icon = Icon.ImageVectorIcon(ExchangerIcons.Favourite),
         iconTextId = R.string.favourite
     )
 }

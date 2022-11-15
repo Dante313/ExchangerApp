@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.walletexchangerapp.common.ExchangerIcons
 
 @Composable
 fun ExchangerTopBar(
@@ -26,12 +27,15 @@ fun ExchangerTopBar(
         modifier = modifier.fillMaxWidth(),
         elevation = 0.dp
     ) {
-        Row(horizontalArrangement = Arrangement.SpaceBetween) {
-            DropDownList(valuesList = menuValues, valueToSelect = menuValues[0], selectedValue = selectedValue)
-            Spacer(modifier = Modifier.width(24.dp))
+        Row(horizontalArrangement = Arrangement.SpaceAround) {
+            DropDownList(
+                valuesList = menuValues,
+                valueToSelect = "",
+                selectedValue = selectedValue,
+            )
             IconButton(onClick = {  }) {
                 Icon(
-                    imageVector = Icons.Default.Menu,
+                    imageVector = ExchangerIcons.Menu,
                     contentDescription = null
                 )
             }
@@ -57,7 +61,7 @@ private fun DropDownList(
                 text = valueToSelect,
                 maxLines = 1,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.widthIn(128.dp)
             )
             Icon(
                 imageVector = Icons.Default.ArrowDropDown,

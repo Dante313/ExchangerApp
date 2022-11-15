@@ -1,9 +1,13 @@
 package com.example.walletexchangerapp.ui.presenter.screens.popular.navigation
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.example.walletexchangerapp.ui.presenter.screens.popular.PopularRoute
 
 const val popularNavigationRoute = "popular_navigation_route"
 
@@ -13,6 +17,6 @@ fun NavController.navigateToPopular(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.popularScreen(navController: NavController) {
     composable(route = popularNavigationRoute) {
-
+        PopularRoute(modifier = Modifier.fillMaxWidth())
     }
 }

@@ -14,11 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.walletexchangerapp.R
+import com.example.walletexchangerapp.domain.model.Rate
+import com.example.walletexchangerapp.domain.model.RatesList
 
 @Composable
-fun RatesList(rates: List<Rate>, onAddedToFavourite: (Rate) -> Unit, modifier: Modifier = Modifier) {
+fun RatesList(ratesList: RatesList, onAddedToFavourite: (Rate) -> Unit, modifier: Modifier = Modifier) {
     LazyColumn(modifier = modifier.fillMaxSize()) {
-        rates.forEach { rate ->
+        ratesList.rates.forEach { rate ->
             item {
                 RateItem(
                     rate = rate,

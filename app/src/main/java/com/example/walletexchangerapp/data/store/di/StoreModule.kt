@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -15,5 +16,5 @@ object StoreModule {
 
     @Singleton
     @Provides
-    fun providerSortStore(@ActivityContext context: Context): SortStore = SortStore(context)
+    fun providerSortStore(@ApplicationContext context: Context): SortStore = SortStore(context)
 }

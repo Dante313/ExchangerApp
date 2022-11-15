@@ -1,5 +1,6 @@
 package com.example.walletexchangerapp.data.network.di
 
+import com.example.walletexchangerapp.BuildConfig
 import com.example.walletexchangerapp.data.network.api.ExchangerApi
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module

@@ -5,7 +5,6 @@ import androidx.room.Room
 import com.example.walletexchangerapp.data.database.WalletDatabase
 import com.example.walletexchangerapp.data.database.WalletDatabase.Companion.DB_NAME
 import com.example.walletexchangerapp.data.database.dao.FavouriteDao
-import com.example.walletexchangerapp.data.database.dao.PopularDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,10 +29,6 @@ object RoomModule {
             .fallbackToDestructiveMigration()
             .build()
     }
-
-    @Singleton
-    @Provides
-    fun providePopularDao(database: WalletDatabase): PopularDao = database.popularDao()
 
     @Singleton
     @Provides

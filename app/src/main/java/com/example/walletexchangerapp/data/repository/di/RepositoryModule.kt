@@ -1,7 +1,6 @@
 package com.example.walletexchangerapp.data.repository.di
 
 import com.example.walletexchangerapp.data.database.dao.FavouriteDao
-import com.example.walletexchangerapp.data.database.dao.PopularDao
 import com.example.walletexchangerapp.data.network.api.ExchangerApi
 import com.example.walletexchangerapp.data.repository.FavouriteRepositoryImpl
 import com.example.walletexchangerapp.data.repository.PopularRepositoryImpl
@@ -23,10 +22,9 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun providePopularRepository(
-        exchangerApi: ExchangerApi,
-        popularDao: PopularDao
+        exchangerApi: ExchangerApi
     ): PopularRepository {
-        return PopularRepositoryImpl(exchangerApi, popularDao)
+        return PopularRepositoryImpl(exchangerApi)
     }
 
     @Singleton
