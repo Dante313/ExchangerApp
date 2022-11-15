@@ -2,9 +2,7 @@ package com.example.walletexchangerapp.ui.presenter.screens.popular
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.walletexchangerapp.common.asResult
 import com.example.walletexchangerapp.domain.model.*
-import com.example.walletexchangerapp.domain.model.RatesMap.Companion.toRatesList
 import com.example.walletexchangerapp.domain.repository.FavouriteRepository
 import com.example.walletexchangerapp.domain.repository.PopularRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,7 +28,7 @@ class PopularViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _walletResponseResultStateFlow.value = popularRepository.getPopularWalletList("RUB")
+            _walletResponseResultStateFlow.value = popularRepository.getPopularWalletList("USD")
         }
     }
 
@@ -52,6 +50,10 @@ class PopularViewModel @Inject constructor(
             }
 
         }
+    }
+
+    fun addRateToFavourite(rate: Rate) {
+        viewModelScope.launch { favouriteRepository.insertFavourite(Favourite(wallet = rate.wallet)) }
     }
 
     private fun RatesMap.favourites(favouriteList: List<String>) =

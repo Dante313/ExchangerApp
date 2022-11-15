@@ -5,5 +5,5 @@ import com.example.walletexchangerapp.domain.model.Wallet
 
 interface PopularRepository {
 
-    suspend fun getPopularWalletList(wallet: String): ResponseResult<Wallet>
+    suspend fun getPopularWalletList(base: String): ResponseResult<Wallet>
 }

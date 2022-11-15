@@ -7,7 +7,7 @@ interface FavouriteRepository {
 
     val favouriteEntitiesFlow: Flow<List<Favourite>>
 
-    suspend fun insertFavourite(favourite: Favourite)
+    suspend fun insertFavourite(rate: Favourite)
 
     suspend fun updateFavourite(favourite: Favourite)
 

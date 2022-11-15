@@ -1,7 +1,7 @@
 package com.example.walletexchangerapp.ui.presenter.screens.popular
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -14,34 +14,40 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.walletexchangerapp.R
+import com.example.walletexchangerapp.domain.model.Rate
 import com.example.walletexchangerapp.ui.presenter.screens.common.RatesList
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun PopularRoute(
-    modifier: Modifier,
     viewModel: PopularViewModel = hiltViewModel()
 ) {
     val popularUiState: PopularUiState by viewModel.popularUiStateFlow.collectAsStateWithLifecycle()
 
-    PopularScreen(popularUiState)
+    PopularScreen(
+        popularUiState = popularUiState,
+        onWalletAddedToFavourite = { viewModel.addRateToFavourite(it) }
+    )
 }
 
 @Composable
-fun PopularScreen(popularUiState: PopularUiState) {
+fun PopularScreen(popularUiState: PopularUiState, onWalletAddedToFavourite: (Rate) -> Unit) {
     when (popularUiState) {
         PopularUiState.Loading -> {
-            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator()
             }
         }
         PopularUiState.Error -> {
-            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(text = stringResource(id = R.string.error_message), style = MaterialTheme.typography.body1)
             }
         }
         is PopularUiState.Success -> {
-            RatesList(ratesList = popularUiState.ratesList, onAddedToFavourite = {})
+            RatesList(
+                ratesList = popularUiState.ratesList,
+                onAddedToFavourite = onWalletAddedToFavourite
+            )
         }
     }
 }

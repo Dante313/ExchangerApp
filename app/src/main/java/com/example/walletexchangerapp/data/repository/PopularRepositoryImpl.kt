@@ -14,10 +14,10 @@ class PopularRepositoryImpl @Inject constructor(
     private val exchangerApi: ExchangerApi
 ) : PopularRepository {
 
-    override suspend fun getPopularWalletList(wallet: String): ResponseResult<Wallet> {
+    override suspend fun getPopularWalletList(base: String): ResponseResult<Wallet> {
         return withContext(Dispatchers.IO) {
             try {
-                val remotePopularResponse = exchangerApi.getPopularWalletList(wallet = wallet)
+                val remotePopularResponse = exchangerApi.getPopularWalletList(base = base)
                 if (remotePopularResponse.isSuccessful) {
                     val popularWallet = remotePopularResponse.body()?.toWallet()
                     ResponseResult.Success(popularWallet)

@@ -1,11 +1,11 @@
 package com.example.walletexchangerapp.ui.presenter.screens.common
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,10 +24,16 @@ fun ExchangerTopBar(
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colors.onSurface),
         elevation = 0.dp
     ) {
-        Row(horizontalArrangement = Arrangement.SpaceAround) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
             DropDownList(
                 valuesList = menuValues,
                 valueToSelect = "",
@@ -52,7 +58,7 @@ private fun DropDownList(
 ) {
     var expanded by rememberSaveable { mutableStateOf(false) }
 
-    Box(modifier = modifier) {
+    Box {
         Row(
             modifier = Modifier.clickable { expanded = !expanded },
             verticalAlignment = Alignment.CenterVertically
@@ -61,7 +67,7 @@ private fun DropDownList(
                 text = valueToSelect,
                 maxLines = 1,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.widthIn(128.dp)
+                modifier = Modifier.widthIn(256.dp)
             )
             Icon(
                 imageVector = Icons.Default.ArrowDropDown,

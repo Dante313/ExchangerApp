@@ -3,16 +3,15 @@ package com.example.walletexchangerapp.data.network.api
 import com.example.walletexchangerapp.data.network.model.RemoteWallet
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface ExchangerApi {
 
     // убрать апи кей
-    @GET("/latest")
+    @GET("exchangerates_data/latest")
     suspend fun getPopularWalletList(
 //        @Header(HEADER_AUTHORIZATION) apikey: String = API_KEY,
-        @Query("wallet") wallet: String
+        @Query("base") base: String
     ) : Response<RemoteWallet>
 
 //    companion object {

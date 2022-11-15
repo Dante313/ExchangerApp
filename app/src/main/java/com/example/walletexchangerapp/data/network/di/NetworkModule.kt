@@ -9,10 +9,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import javax.inject.Singleton
@@ -45,7 +43,7 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideRetrofit(client: OkHttpClient): Retrofit {
-        val BASE_URL = "https://api.apilayer.com/exchangerates_data/"
+        val BASE_URL = "https://api.apilayer.com/"
         val CONTENT_TYPE = "application/json"
         val json = Json { ignoreUnknownKeys = true }
 
