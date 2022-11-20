@@ -15,10 +15,16 @@ class FavouriteRepositoryImpl @Inject constructor(
     private val favouriteDao: FavouriteDao
     ) : FavouriteRepository {
 
-    override val favouriteEntitiesFlow: Flow<List<Favourite>> =
+    override val favouriteFlow: Flow<List<Favourite>> =
         favouriteDao.getFavouriteEntitiesFlow().map { favourites ->
             favourites.map { favourite -> favourite.toFavourite() }
         }
+
+    override suspend fun getFavourites(): List<Favourite> {
+        return withContext(Dispatchers.IO) {
+            favouriteDao.getFavouriteEntities().map { it.toFavourite() }
+        }
+    }
 
     override suspend fun insertFavourite(favourite: Favourite) {
         withContext(Dispatchers.IO) {
@@ -26,13 +32,7 @@ class FavouriteRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun updateFavourite(favourite: Favourite) {
-        withContext(Dispatchers.IO) {
-            favouriteDao.updateFavouriteEntity(favourite.toFavouriteEntity())
-        }
-    }
-
-    override suspend fun deleteFavourite(walletId: Long) = withContext(Dispatchers.IO) {
-        favouriteDao.deleteFavouriteEntity(walletId)
+    override suspend fun deleteFavourite(wallet: String) = withContext(Dispatchers.IO) {
+        favouriteDao.deleteFavouriteEntity(wallet)
     }
 }

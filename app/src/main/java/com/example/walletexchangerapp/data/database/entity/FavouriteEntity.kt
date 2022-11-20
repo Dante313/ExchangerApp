@@ -6,15 +6,8 @@ import com.example.walletexchangerapp.domain.model.Favourite
 
 
 @Entity(tableName = "favourite")
-data class FavouriteEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val wallet: String
-) {
+data class FavouriteEntity(@PrimaryKey val wallet: String) {
     companion object {
-
-        fun FavouriteEntity.toFavourite() = Favourite(
-            id = id,
-            wallet = wallet
-        )
+        fun FavouriteEntity.toFavourite() = Favourite(wallet)
     }
 }

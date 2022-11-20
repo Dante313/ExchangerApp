@@ -6,6 +6,7 @@ import com.example.walletexchangerapp.domain.model.ResponseResult
 import com.example.walletexchangerapp.domain.model.Wallet
 import com.example.walletexchangerapp.domain.repository.PopularRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import javax.inject.Inject

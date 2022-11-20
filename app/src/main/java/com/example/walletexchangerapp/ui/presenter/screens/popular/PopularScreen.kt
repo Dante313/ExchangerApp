@@ -16,37 +16,38 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.walletexchangerapp.R
 import com.example.walletexchangerapp.domain.model.Rate
 import com.example.walletexchangerapp.ui.presenter.screens.common.RatesList
+import com.example.walletexchangerapp.ui.presenter.screens.common.WalletUiState
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun PopularRoute(
     viewModel: PopularViewModel = hiltViewModel()
 ) {
-    val popularUiState: PopularUiState by viewModel.popularUiStateFlow.collectAsStateWithLifecycle()
+    val walletUiState: WalletUiState by viewModel.walletUiStateFlow.collectAsStateWithLifecycle()
 
     PopularScreen(
-        popularUiState = popularUiState,
-        onWalletAddedToFavourite = { viewModel.addRateToFavourite(it) }
+        walletUiState = walletUiState,
+        onWalletAddedToFavourite = { viewModel.addOrDeleteRateFromFavourite(it) }
     )
 }
 
 @Composable
-fun PopularScreen(popularUiState: PopularUiState, onWalletAddedToFavourite: (Rate) -> Unit) {
-    when (popularUiState) {
-        PopularUiState.Loading -> {
+fun PopularScreen(walletUiState: WalletUiState, onWalletAddedToFavourite: (Rate) -> Unit) {
+    when (walletUiState) {
+        WalletUiState.Loading -> {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator()
             }
         }
-        PopularUiState.Error -> {
+        WalletUiState.Error -> {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(text = stringResource(id = R.string.error_message), style = MaterialTheme.typography.body1)
             }
         }
-        is PopularUiState.Success -> {
+        is WalletUiState.Success -> {
             RatesList(
-                ratesList = popularUiState.ratesList,
-                onAddedToFavourite = onWalletAddedToFavourite
+                ratesList = walletUiState.ratesList,
+                onAddedOrDeleted = onWalletAddedToFavourite
             )
         }
     }

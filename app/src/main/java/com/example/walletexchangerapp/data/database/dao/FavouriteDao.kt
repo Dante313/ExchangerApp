@@ -11,12 +11,12 @@ interface FavouriteDao {
     @Query("SELECT * FROM favourite")
     fun getFavouriteEntitiesFlow(): Flow<List<FavouriteEntity>>
 
+    @Query("SELECT * FROM favourite")
+    suspend fun getFavouriteEntities(): List<FavouriteEntity>
+
     @Insert(onConflict = REPLACE)
     suspend fun insertFavouriteEntity(favouriteEntity: FavouriteEntity)
 
-    @Update
-    suspend fun updateFavouriteEntity(favouriteEntity: FavouriteEntity)
-
-    @Query("DELETE FROM favourite WHERE id = :walletId")
-    suspend fun deleteFavouriteEntity(walletId: Long)
+    @Query("DELETE FROM favourite WHERE wallet = :wallet")
+    suspend fun deleteFavouriteEntity(wallet: String)
 }

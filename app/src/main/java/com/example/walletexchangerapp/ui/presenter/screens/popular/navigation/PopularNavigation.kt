@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.example.walletexchangerapp.ui.presenter.screens.favourite.FavouriteRoute
 import com.example.walletexchangerapp.ui.presenter.screens.popular.PopularRoute
 
 const val popularNavigationRoute = "popular_navigation_route"

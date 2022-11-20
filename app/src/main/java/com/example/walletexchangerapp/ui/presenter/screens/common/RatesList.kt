@@ -19,13 +19,13 @@ import com.example.walletexchangerapp.domain.model.Rate
 import com.example.walletexchangerapp.domain.model.RatesList
 
 @Composable
-fun RatesList(ratesList: RatesList, onAddedToFavourite: (Rate) -> Unit, modifier: Modifier = Modifier) {
+fun RatesList(ratesList: RatesList, onAddedOrDeleted: (Rate) -> Unit, modifier: Modifier = Modifier) {
     LazyColumn(modifier = modifier.fillMaxSize()) {
         ratesList.rates.forEach { rate ->
             item {
                 RateItem(
                     rate = rate,
-                    onAddedToFavourite = { onAddedToFavourite(rate) },
+                    onAddedOrDeleted = { onAddedOrDeleted(rate) },
                     modifier = Modifier.padding(16.dp)
                 )
             }
@@ -36,7 +36,7 @@ fun RatesList(ratesList: RatesList, onAddedToFavourite: (Rate) -> Unit, modifier
 @Composable
 fun RateItem(
     rate: Rate,
-    onAddedToFavourite: () -> Unit,
+    onAddedOrDeleted: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -48,7 +48,7 @@ fun RateItem(
             text = stringResource(R.string.wallet_rate, rate.wallet, rate.amount),
             style = MaterialTheme.typography.body1
         )
-        IconButton(onClick = onAddedToFavourite) {
+        IconButton(onClick = onAddedOrDeleted) {
             if (rate.isFavourite) {
                 Icon(imageVector = Icons.Default.Done, contentDescription = "")
             } else {

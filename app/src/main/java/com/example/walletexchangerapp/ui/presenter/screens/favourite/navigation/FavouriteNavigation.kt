@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.example.walletexchangerapp.ui.presenter.screens.favourite.FavouriteRoute
 
 const val favouriteNavigationRoute = "favourite_navigation_route"
 
@@ -13,6 +14,6 @@ fun NavController.navigateToFavourite(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.favouriteScreen(navController: NavController) {
     composable(route = favouriteNavigationRoute) {
-
+        FavouriteRoute()
     }
 }

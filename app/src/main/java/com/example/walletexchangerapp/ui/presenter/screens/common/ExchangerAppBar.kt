@@ -1,5 +1,6 @@
 package com.example.walletexchangerapp.ui.presenter.screens.common
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -20,6 +21,7 @@ import com.example.walletexchangerapp.common.ExchangerIcons
 @Composable
 fun ExchangerTopBar(
     menuValues: List<String>,
+    valueToSelect: String,
     selectedValue: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -36,7 +38,7 @@ fun ExchangerTopBar(
         ) {
             DropDownList(
                 valuesList = menuValues,
-                valueToSelect = "",
+                valueToSelect = valueToSelect,
                 selectedValue = selectedValue,
             )
             IconButton(onClick = {  }) {
@@ -53,8 +55,7 @@ fun ExchangerTopBar(
 private fun DropDownList(
     valuesList: List<String>,
     valueToSelect: String,
-    selectedValue: (String) -> Unit,
-    modifier: Modifier = Modifier
+    selectedValue: (String) -> Unit
 ) {
     var expanded by rememberSaveable { mutableStateOf(false) }
 
