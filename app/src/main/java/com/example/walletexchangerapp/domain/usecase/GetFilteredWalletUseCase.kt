@@ -31,14 +31,14 @@ class GetFilteredWalletUseCase @Inject constructor(
             when (walletResult) {
                 is ResponseResult.Success -> {
                     walletResult.data?.rates?.let { ratesMap ->
-                        if (onlyFavourite) {
-                            val favouritesList = RatesList((ratesMap.favourites(favourites.map { it.wallet })))
+                        val favouritesList = RatesList((ratesMap.favourites(favourites.map { it.wallet })))
 
+                        if (onlyFavourite) {
                             WalletUiState.Success(
                                 favouritesList.copy(rates = favouritesList.rates.filter { it.isFavourite })
                             )
                         } else {
-                            WalletUiState.Success(RatesList((ratesMap.favourites(favourites.map { it.wallet }))))
+                            WalletUiState.Success(favouritesList)
                         }
                     } ?: WalletUiState.Error
                 }
