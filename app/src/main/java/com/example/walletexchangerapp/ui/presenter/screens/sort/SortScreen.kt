@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -48,8 +49,8 @@ private fun MaterialRadioButtonGroupComponent(
     val radioGroupOptions = listOf(
         Sort.AMOUNT_ASC,
         Sort.AMOUNT_DESC,
-        Sort.NAME_ASC,
-        Sort.NAME_DESC
+        Sort.WALLET_ASC,
+        Sort.WALLET_DESC
     )
     Card(
         shape = RoundedCornerShape(4.dp),
@@ -73,7 +74,7 @@ private fun MaterialRadioButtonGroupComponent(
                         onClick = { onSelectedSort(sort) }
                     )
                     Text(
-                        text = sort.title,
+                        text = stringResource(sort.title),
                         style = MaterialTheme.typography.body1.merge(),
                         modifier = Modifier.padding(start = 16.dp)
                     )

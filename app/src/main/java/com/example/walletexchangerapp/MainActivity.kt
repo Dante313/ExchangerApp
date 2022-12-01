@@ -16,6 +16,10 @@ import com.example.walletexchangerapp.ui.presenter.screens.sort.SortDialog
 import com.example.walletexchangerapp.ui.theme.WalletExchangerAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val RUB_WALLET = "RUB"
+private const val KZT_WALLET = "KZT"
+private const val UAH_WALLET = "UAH"
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
@@ -25,7 +29,7 @@ class MainActivity : ComponentActivity() {
             val mainViewModel: MainViewModel = hiltViewModel()
 
             val appState = rememberExchangerAppState()
-            val walletsList = listOf("RUB", "KZT", "UAH")
+            val walletsList = listOf(RUB_WALLET, KZT_WALLET, UAH_WALLET)
             var selectedWallet by remember { mutableStateOf(walletsList[0]) }
             var sortDialogState by remember { mutableStateOf(false) }
 

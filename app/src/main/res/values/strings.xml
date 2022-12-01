@@ -4,4 +4,8 @@
     <string name="popular">Popular</string>
     <string name="favourite">Favourite</string>
     <string name="error_message">Something went wrong…</string>
+    <string name="wallet_asc">Название по возрастанию</string>
+    <string name="wallet_desc">Название по убыванию</string>
+    <string name="amount_asc">Цена по возрастанию</string>
+    <string name="amount_desc">Цена по убыванию</string>
 </resources>

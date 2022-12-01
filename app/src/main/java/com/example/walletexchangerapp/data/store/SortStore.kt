@@ -12,12 +12,12 @@ import kotlinx.coroutines.flow.map
 
 class SortStore(private val context: Context) {
 
-    var sort = Sort.NAME_ASC
+    var sort = Sort.WALLET_ASC
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(SORT_STORE_NAME)
 
     val sortFlow: Flow<Sort> = context.dataStore.data.map { preferences ->
-        Sort.valueOf(preferences[KEY_SORT] ?: Sort.NAME_ASC.name).also {
+        Sort.valueOf(preferences[KEY_SORT] ?: Sort.WALLET_ASC.name).also {
             sort = it
         }
     }

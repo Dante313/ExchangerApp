@@ -54,8 +54,8 @@ class GetFilteredWalletUseCase @Inject constructor(
         return when (sort) {
             Sort.AMOUNT_ASC -> { RatesList(this.rates.sortedBy { it.amount }) }
             Sort.AMOUNT_DESC -> { RatesList(this.rates.sortedByDescending { it.amount }) }
-            Sort.NAME_ASC -> { RatesList(this.rates.sortedBy { it.wallet }) }
-            Sort.NAME_DESC -> { RatesList(this.rates.sortedByDescending { it.wallet }) }
+            Sort.WALLET_ASC -> { RatesList(this.rates.sortedBy { it.wallet }) }
+            Sort.WALLET_DESC -> { RatesList(this.rates.sortedByDescending { it.wallet }) }
         }
     }
 
