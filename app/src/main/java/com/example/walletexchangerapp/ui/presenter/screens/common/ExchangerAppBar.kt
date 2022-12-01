@@ -1,22 +1,21 @@
 package com.example.walletexchangerapp.ui.presenter.screens.common
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.compose.ui.unit.toSize
 import com.example.walletexchangerapp.common.ExchangerIcons
 
 @Composable
@@ -60,11 +59,14 @@ private fun DropDownList(
     selectedValue: (String) -> Unit
 ) {
     var expanded by rememberSaveable { mutableStateOf(false) }
+    var optionRowSize by remember { mutableStateOf(Size.Zero) }
 
     Box {
         Row(
-            modifier = Modifier.clickable { expanded = !expanded },
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier
+                .onGloballyPositioned { coordinates -> optionRowSize = coordinates.size.toSize() }
+                .clickable { expanded = !expanded },
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = valueToSelect,
@@ -80,7 +82,8 @@ private fun DropDownList(
         }
         DropdownMenu(
             expanded = expanded,
-            onDismissRequest = { expanded = false }
+            onDismissRequest = { expanded = false },
+            modifier = Modifier.width(with(LocalDensity.current) { optionRowSize.width.toDp() })
         ) {
             valuesList.forEach { value ->
                 DropdownMenuItem(
@@ -89,7 +92,7 @@ private fun DropDownList(
                         selectedValue(value)
                     }
                 ) {
-                    Text(text = value, textAlign = TextAlign.Center)
+                    Text(text = value, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
                 }
             }
         }
