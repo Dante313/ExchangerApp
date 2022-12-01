@@ -2,6 +2,7 @@ package com.example.walletexchangerapp.domain.usecase.di
 
 import com.example.walletexchangerapp.domain.repository.FavouriteRepository
 import com.example.walletexchangerapp.domain.repository.PopularRepository
+import com.example.walletexchangerapp.domain.repository.SortRepository
 import com.example.walletexchangerapp.domain.usecase.AddOrDeleteFavouriteUseCase
 import com.example.walletexchangerapp.domain.usecase.GetFilteredWalletUseCase
 import dagger.Module
@@ -20,9 +21,10 @@ class UseCaseModule {
     @Provides
     fun provideGetFilteredWalletUseCase(
         favouriteRepository: FavouriteRepository,
-        popularRepository: PopularRepository
+        popularRepository: PopularRepository,
+        sortRepository: SortRepository
     ): GetFilteredWalletUseCase {
-        return GetFilteredWalletUseCase(favouriteRepository, popularRepository)
+        return GetFilteredWalletUseCase(favouriteRepository, popularRepository, sortRepository)
     }
 
     @Singleton

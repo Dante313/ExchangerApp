@@ -1,11 +1,9 @@
 package com.example.walletexchangerapp.domain.usecase
 
-import com.example.walletexchangerapp.domain.model.RatesList
-import com.example.walletexchangerapp.domain.model.RatesMap
-import com.example.walletexchangerapp.domain.model.ResponseResult
-import com.example.walletexchangerapp.domain.model.Wallet
+import com.example.walletexchangerapp.domain.model.*
 import com.example.walletexchangerapp.domain.repository.FavouriteRepository
 import com.example.walletexchangerapp.domain.repository.PopularRepository
+import com.example.walletexchangerapp.domain.repository.SortRepository
 import com.example.walletexchangerapp.ui.presenter.screens.common.WalletUiState
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +13,8 @@ import javax.inject.Inject
 
 class GetFilteredWalletUseCase @Inject constructor(
     private val favouriteRepository: FavouriteRepository,
-    private val popularRepository: PopularRepository
+    private val popularRepository: PopularRepository,
+    private val sortRepository: SortRepository
 ) {
     private val _walletResponseResultFlow = MutableSharedFlow<ResponseResult<Wallet>>(
         extraBufferCapacity = 1,
@@ -26,19 +25,21 @@ class GetFilteredWalletUseCase @Inject constructor(
     operator fun invoke(onlyFavourite: Boolean = false): Flow<WalletUiState> {
         return combine(
             favouriteRepository.favouriteFlow,
-            _walletResponseResultFlow
-        ) { favourites, walletResult ->
+            _walletResponseResultFlow,
+            sortRepository.sortFlow
+        ) { favourites, walletResult, sort ->
             when (walletResult) {
                 is ResponseResult.Success -> {
                     walletResult.data?.rates?.let { ratesMap ->
-                        val favouritesList = RatesList((ratesMap.favourites(favourites.map { it.wallet })))
+                        val ratesList = RatesList((ratesMap.favourites(favourites.map { it.wallet })))
+                        val sortedRatesList = ratesList.sortBy(sort)
 
                         if (onlyFavourite) {
                             WalletUiState.Success(
-                                favouritesList.copy(rates = favouritesList.rates.filter { it.isFavourite })
+                                sortedRatesList.copy(rates = sortedRatesList.rates.filter { it.isFavourite })
                             )
                         } else {
-                            WalletUiState.Success(favouritesList)
+                            WalletUiState.Success(sortedRatesList)
                         }
                     } ?: WalletUiState.Error
                 }
@@ -46,6 +47,15 @@ class GetFilteredWalletUseCase @Inject constructor(
                 else -> WalletUiState.Error
             }
 
+        }
+    }
+
+    private fun RatesList.sortBy(sort: Sort): RatesList {
+        return when (sort) {
+            Sort.AMOUNT_ASC -> { RatesList(this.rates.sortedBy { it.amount }) }
+            Sort.AMOUNT_DESC -> { RatesList(this.rates.sortedByDescending { it.amount }) }
+            Sort.NAME_ASC -> { RatesList(this.rates.sortedBy { it.wallet }) }
+            Sort.NAME_DESC -> { RatesList(this.rates.sortedByDescending { it.wallet }) }
         }
     }
 

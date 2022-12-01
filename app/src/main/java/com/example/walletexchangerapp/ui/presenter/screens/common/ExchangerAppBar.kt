@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.walletexchangerapp.common.ExchangerIcons
 
 @Composable
@@ -23,6 +24,7 @@ fun ExchangerTopBar(
     menuValues: List<String>,
     valueToSelect: String,
     selectedValue: (String) -> Unit,
+    onNavigateToSort: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
@@ -41,7 +43,7 @@ fun ExchangerTopBar(
                 valueToSelect = valueToSelect,
                 selectedValue = selectedValue,
             )
-            IconButton(onClick = {  }) {
+            IconButton(onClick = onNavigateToSort) {
                 Icon(
                     imageVector = ExchangerIcons.Menu,
                     contentDescription = null
